@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./../home.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Administrar Cuenta</h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <h:panelGroup rendered="#{sesionControlador.moduloSelecionado.permiso.crear eq true}">
+                                        <h:button value="Nueva Cuenta" styleClass="btn btn-success" outcome="create.xhtml" />
+                                    </h:panelGroup>
+                                </div>
+                            </div>      
+                            <br/>
+                            <h:form id="formUsuario">
+                                <p:growl globalOnly="true"/>
+                                <f:event type="preRenderView" listener="#{usuarioControlador.initList}" />
+                                <p:dataTable    value="#{usuarioControlador.usuarioPaginador}"    var="list" emptyMessage="No existen registros de usuarios" 
+                                                paginator="true" rows="10" lazy="true" rowIndexVar="rowIndex"
+                                                paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"   >
+
+                                    <p:column  style="text-align: center;width: 6%;font-size: 15px;">
+                                        <f:facet name="header">
+                                            #
+                                        </f:facet>
+                                        <h:outputText value="#{rowIndex+1}" />
+                                    </p:column>
+                                    <p:column  sortBy="#{list.nick}"   style="text-align: center;font-size: 15px;">
+                                        <f:facet name="header">
+                                            Cuenta
+                                        </f:facet>
+                                        <h:outputText value="#{list.nick}" />
+                                    </p:column>
+                                    <p:column  sortBy="#{list.operador.nombre}"  style="text-align: center;font-size: 15px;">
+                                        <f:facet name="header">
+                                            Nombre
+                                        </f:facet>
+                                        <h:outputText value="#{list.operador.nombre}" />
+                                    </p:column>
+                                    <p:column  sortBy="#{list.operador.apellidos}"  style="text-align: center;font-size: 15px;">
+                                        <f:facet name="header">
+                                            Apellidos
+                                        </f:facet>
+                                        <h:outputText value="#{list.operador.apellidos}" />
+                                    </p:column>
+                                    <p:column  sortBy="#{list.perfil.nombre}"   style="text-align: center;font-size: 15px;">
+                                        <f:facet name="header">
+                                            Perfil
+                                        </f:facet>
+                                        <h:outputText value="#{list.perfil.nombre}" />
+                                    </p:column>
+                                    <p:column  style="text-align: center;width: 8%;">
+                                        <p:commandButton style="font-size: 12px;" icon="icon-update" action="#{usuarioControlador.irActualizar(list.id)}"    >
+                                        </p:commandButton>
+                                        <p:commandButton style="font-size: 12px;" icon="icon-delete" actionListener="#{usuarioControlador.capturarUsuario(list.id)}" oncomplete="PF('deleteUsuario').show();"   >
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:dataTable> 
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <p:dialog modal="true" position="center top"  widgetVar="deleteUsuario" resizable="false" showEffect="fade" >
+            <h:form >
+                <div   id="row" style="font-weight: bold;font-size: 14px;">
+                    ¿Desea Eliminar el Usuario ?
+                </div>
+                <div   id="row">
+                    <div class="col-lg-6">
+                        <p:commandButton  actionListener="#{usuarioControlador.eliminarUsuario}" update=":formUsuario" value="Si" oncomplete="PF('deleteUsuario').hide();"   >
+
+                        </p:commandButton>
+                    </div>
+                    <div class="col-lg-6">
+                        <p:commandButton    value="No" onclick="PF('deleteUsuario').hide();"   >
+
+                        </p:commandButton>
+                    </div>
+                </div>
+            </h:form>
+        </p:dialog>
+
+    </ui:define>
+
+</ui:composition>

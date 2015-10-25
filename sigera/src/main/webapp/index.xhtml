@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Login to Sigera</title>
+        <h:outputStylesheet name="css/bootstrap.css"/>
+        <h:outputStylesheet name="css/main.css"/>
+        <h:outputStylesheet name="css/morris.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="login-panel panel panel-default">
+                        <div class="panel-heading text-center">
+                            <h3 class="panel-title ">
+                                <strong>SIGERA</strong>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <h:form >
+                                <h:messages globalOnly="true"  styleClass="list-group" 
+                                            infoClass="list-group-item list-group-item-success"
+                                            errorClass="list-group-item list-group-item-danger"
+                                            />
+                                <fieldset>
+                                    <div class="form-group">
+                                        <h:inputText id="cuenta" styleClass="form-control"  pt:placeholder="Cuenta" value=""  pt:autofocus="true" >
+                                        </h:inputText>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:inputSecret id="clave" styleClass="form-control" pt:placeholder="Clave" value=""    >
+                                        </h:inputSecret>
+                                    </div>
+                                    <!-- Change this to a button or input when using this as a form -->
+                                    <h:commandButton styleClass="btn btn-lg btn-danger btn-block"  value="Acceder">
+                                        <f:ajax execute="@form" render="@form"  />
+                                    </h:commandButton> 
+                                </fieldset>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h:outputScript name="./js/jquery.js" />
+        <h:outputScript name="./js/bootstrap.min.js" />
+    </h:body>
+</html>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>   
+    </h:head>
+    <h:body>
+        <ui:composition template="/views/home.xhtml">
+            <ui:define name="content">
+                <div class="panel panel-default margin-top-4x">
+                    <div class="panel-heading">
+                        <h3><strong>Administrar Matricula</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 margin-bottom" >
+                                <h4><strong>Listado de Matriculas</strong></h4>
+                            </div>    
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 margin-bottom" >
+                                <div class="input-group">                                            
+                                    <input type="text" class="form-control" placeholder="Ingrese Nombre a Buscar"/>
+                                    <span class="input-group-addon glyphicon glyphicon-search"></span>
+                                </div>
+                            </div>    
+                            <div class="col-xs-6 col-xs-offset-0 col-sm-6 col-sm-offset-0 col-md-3 col-md-offset-5 col-lg-3 col-lg-offset-5 margin-bottom" >
+                                <a class="btn btn-primary return-list btn-size" href="create.xhtml"><i class="glyphicon glyphicon-file"></i> Nueva Matricula</a>
+                            </div>    
+                            <div class="col-xs-12 col-sm-10 col-md-10 col-xs-offset-0 col-sm-offset-1 col-md-offset-1">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nombres y Apellidos</th>
+                                            <th>Grado</th>
+                                            <th>Estado</th>
+                                            <th>Fecha Registro</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Jorge Guisbert</td>
+                                            <td>3 de Primaria</td>
+                                            <td>Matriculado</td>
+                                            <td>12-02-12</td>
+                                            <td>
+                                                <td><a class="btn btn-danger margin-right" href=""><i class="glyphicon glyphicon-remove"></i></a></td>
+                                                <td><a class="btn btn-default margin-right" href="update.xhtml"><i class="glyphicon glyphicon-cog"></i></a></td>
+                                                <td><a class="btn btn-warning" href="detail.xhtml"><i class="glyphicon glyphicon-file"></i></a></td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jose Palomino</td>
+                                            <td>1 de Primaria</td>
+                                            <td>Pendiente</td>
+                                            <td>10-02-12</td>
+                                            <td>
+                                                <td><a class="btn btn-danger margin-right" href=""><i class="glyphicon glyphicon-remove"></i></a></td>
+                                                <td><a class="btn btn-default margin-right" href=""><i class="glyphicon glyphicon-cog"></i></a></td>
+                                                <td><a class="btn btn-warning" href=""><i class="glyphicon glyphicon-file"></i></a></td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Andy Castillo</td>
+                                            <td>Inicial</td>
+                                            <td>Matriculado</td>
+                                            <td>10-02-13</td>
+                                            <td>
+                                                <td><a class="btn btn-danger margin-right" href=""><i class="glyphicon glyphicon-remove"></i></a></td>
+                                                <td><a class="btn btn-default margin-right" href=""><i class="glyphicon glyphicon-cog"></i></a></td>
+                                                <td><a class="btn btn-warning" href=""><i class="glyphicon glyphicon-file"></i></a></td>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div> 
+                </div>             
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

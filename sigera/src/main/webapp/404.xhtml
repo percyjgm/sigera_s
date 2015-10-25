@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Error - Sigera</title>
+        <h:outputStylesheet  name="css/bootstrap.css" />
+        <style>
+            body{
+                background-color: #D3304D;
+
+            }
+            img{
+                width: 100%;
+                position: relative;
+                max-height: 100%;
+                max-width: 100%;
+            }
+            .cabecera{
+                margin-top: 15%;
+                
+            }
+            p{
+               font-size: 25px;
+               color: #ECEFF1;
+            }
+        </style>
+    </h:head>
+    <h:body >
+        <div class="container" >
+            <div class="row cabecera">
+                <div  class="col-lg-5" >
+                    <img src="#{request.contextPath}/resources/image/title_404_2.png">
+                        
+                    </img>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-lg-7" >
+                    <p>
+                        La página que usted ha deseado ingresar no existe. Le invitamos a regresar a la página <a href="#{request.contextPath}/views/home.xhtml">Principal.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+

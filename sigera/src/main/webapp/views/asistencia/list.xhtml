@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.com/ui"
+                template="/views/home.xhtml">
+
+    <ui:define name="content">
+        <div class="panel panel-default margin-top">
+            <div class="panel-heading">
+                <h3><strong>Administrar Asistencia</strong></h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 margin-bottom" >
+                        <h4><strong>Listado de Asistenciass</strong></h4>
+                    </div>  
+                    <div class="col-xs-12 col-xs-offset-0 col-sm-3 col-sm-offset-8 col-md-3 col-md-offset-2 col-lg-3 col-lg-offset-2 margin-bottom" >
+                        <a class="btn btn-primary return-list btn-size" href="create.xhtml">
+                            <i class="glyphicon glyphicon-file"></i> Nueva Asistencia
+                        </a>
+                    </div>    
+                    <div class="col-xs-12 col-sm-10 col-md-10 col-xs-offset-0 col-sm-offset-1 col-md-offset-1">
+                        <h:form id="formAsistencia">
+                            <h:dataTable value="" var="list" rows="10"
+                                         
+                                         styleClass="order-table"
+                                         headerClass="order-table-header"
+                                         rowClasses="order-table-odd-row,order-table-even-row"
+                                         >
+
+                                
+                                <h:column>
+                                    <!-- column header -->
+                                    <f:facet name="header">#</f:facet>
+                                    <!-- row record -->
+                                    <!-- Colocar aca la data {list.ATRIBUTO} -->
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">Lista de Asistencias</f:facet>
+                                    
+                                    
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">Hora de Registro</f:facet>
+                                    
+                                    
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">Fecha de Registro</f:facet>
+                                    
+                                    
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">Fecha de Modificacion</f:facet>
+                                    
+                                    
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">Opciones</f:facet>
+                                    <h:commandButton styleClass="btn-warning" actionListener="#{perfilControlador.capturarPermiso(list.id)}" action="PF('deleteperfil').show();"   >
+                                    </h:commandButton>                                    
+                                </h:column>
+
+                            </h:dataTable>
+                            
+                        </h:form>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        
+    </ui:define>
+
+</ui:composition>

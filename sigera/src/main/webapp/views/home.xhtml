@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta name="description" content=""></meta>
+        <meta name="author" content=""></meta>
+
+        <title>Welcome to Sigera</title>
+
+        <h:outputStylesheet name="./css/bootstrap.css"/>
+        <h:outputStylesheet name="./css/main.css"/>
+        <h:outputStylesheet name="./css/morris.css"/>
+    </h:head>
+
+    <h:body>
+        <f:event type="preRenderView" listener="#{sesionControlador.validarModuloPostBack}" />
+        <div id="wrapper">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#{request.contextPath}/views/home.xhtml">
+                        <h:graphicImage style=" height: 20px;"  url="#{facesContext.externalContext.contextName}/resources/image/iep_ecp.png" />
+                    </a>
+                </div>
+
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#{request.contextPath}/views/user_profile/cuenta.xhtml"><i class="fa fa-user fa-fw"></i>Mi Cuenta</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <h:form >
+                                    <h:commandLink style="color: #333;text-decoration: none;" action="#{loginControlador.logout}" ><i class="fa fa-sign-out fa-fw"></i> Logout</h:commandLink>
+                                </h:form>
+
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav" id="side-menu">
+                        <c:forEach items="#{sesionControlador.menuSistema}" varStatus="indicePadre" var="item" >
+                            <li class="#{sesionControlador.moduloSelecionado.moduloPadre.nombre eq item.nombre ? 'active' :''}" >
+                                <a href="#"><i class="glyphicon glyphicon-bookmark"></i> #{item.nombre}<span class="glyphicon glyphicon-arrow-right"></span></a>
+
+                                <ul class="nav nav-second-level">
+                                    <h:form styleClass="nav nav-second-level" >
+                                        <c:forEach items="#{item.modulos}" varStatus="indiceHijo"   var="sub">
+
+                                            <li>
+                                                <h:commandLink styleClass="#{sesionControlador.moduloSelecionado.url == sub.url ? 'active' :''}" pt:index="#{sub.url}" action="#{sesionControlador.redireccionar(sub.url,indicePadre.index,indiceHijo.index)}" value="#{sub.nombre}" ></h:commandLink>
+                                            </li>
+                                        </c:forEach>
+                                    </h:form>
+                                </ul>
+
+                            </li>
+                        </c:forEach>
+                    </ul>                    
+                </div>
+            </nav>
+            <div id="page-wrapper">
+                <div class="container-fluid">                    
+                    <ui:insert name="content">                       
+
+                    </ui:insert>
+                </div>
+            </div>
+        </div>
+        <h:form>
+            <p:idleMonitor onactive="PF('sessionTimeOutDialog').show();" timeout="#{session.maxInactiveInterval * 1000}" >
+            </p:idleMonitor>
+            <div class="col-xs-10 col-sm-6 col-md-6 col-lg-4">
+                <p:dialog header="Sesión caducada" widgetVar="sessionTimeOutDialog" resizable="false"
+                          modal="true" position="center center" closable="false" visible="false" style="text-align: center;" >
+                    <br />
+                    <input id="confirmBackToLogin" type="button" class="btn btn-success btn-lg" value="Volver acceder a la aplicación" 
+                           onclick="window.location = '#{facesContext.externalContext.requestContextPath}/index.xhtml';" />
+                </p:dialog>
+            </div>
+        </h:form>
+        
+        <h:outputScript name="./js/jquery.js" />
+        <h:outputScript name="./js/bootstrap.min.js" />
+    </h:body>
+
+</html>

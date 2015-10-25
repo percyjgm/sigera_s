@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./../home.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions">
+
+    <ui:define name="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">Administrar Cuenta</h3>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 opcion-listado" >
+                    <h:link style="font-size: 16px;font-weight: bold;" value="Regresar al Listado" outcome="list.xhtml"></h:link>
+                </div>
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"  >Registrar Usuario</div>
+                        <div class="panel-body">
+                            <div class="row" id="modificarUsuario">
+                                <div class="col-lg-12">
+                                    <h:form id="frmRegistrarUsuario" styleClass="form-horizontal" >
+                                        <f:event type="preRenderView" listener="#{usuarioControlador.initCreate}" />
+                                        <h:messages id="msg" globalOnly="true" styleClass="list-group" infoClass="list-group-item list-group-item-success"
+                                                    errorClass="list-group-item list-group-item-danger" />
+                                        <div class="form-group has-feedback">
+                                            <label for="operador" class="col-sm-3 control-label" >Persona :</label>
+                                            <div class="col-sm-5" >
+                                                <h:selectOneMenu styleClass="form-control" id="persona" value="#{usuarioControlador.persona.idPersona}" >
+                                                    <f:attribute name="fieldLabel" value="una Persona" />
+                                                    <f:validator validatorId="selectOneValidator" />
+                                                    <f:selectItem itemLabel="Seleccione una persona" itemValue="0"/>
+                                                    <f:selectItems value="#{usuarioControlador.personas}" var="listPersonas" itemValue="#{listPersonas.idPersona}" itemLabel="#{listPersonas.nombre} #{listPersonas.apellidoPaterno}"/>
+                                                </h:selectOneMenu>
+                                            </div>	
+                                        </div>
+                                        <div class="form-group has-feedback">
+                                            <label for="user" class="col-sm-3 control-label" >Usuario :</label>
+                                            <div class="col-sm-5">
+                                                <h:inputText styleClass="form-control"  id="user" style="text-transform: lowercase;" value="#{usuarioControlador.usuario.nick}">
+                                                    <f:attribute name="fieldLabel" value="Usuario" />
+                                                    <f:attribute name="minimo" value="4" />
+                                                    <f:attribute name="maximo" value="20" />
+                                                    <f:attribute name="type" value="only_letter" />
+                                                    <f:validator validatorId="nullValidator" />
+                                                    <f:validator validatorId="rangeValidator" />
+                                                    <f:validator validatorId="patternValidator"   />
+                                                </h:inputText>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-feedback">
+                                            <label for="pass" class="col-sm-3 control-label" >Contraseña :</label>
+                                            <div class="col-sm-5">
+                                                <p:password styleClass="form-control" id="pass" value="#{usuarioControlador.usuario.clave}" >
+                                                    <f:attribute name="fieldLabel" value="Contraseña" />
+                                                    <f:attribute name="minimo" value="4" />
+                                                    <f:attribute name="maximo" value="20" />
+                                                    <f:validator validatorId="nullValidator" />
+                                                    <f:validator validatorId="rangeValidator" />
+                                                    <f:validator validatorId="patternValidator" />                                               
+                                                </p:password> 
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-feedback">
+                                            <label for="perfil" class="col-sm-3 control-label" >Perfil :</label>
+                                            <div class="col-sm-5" >
+                                                <h:selectOneMenu id="perfil" styleClass="form-control" value="#{usuarioControlador.perfil.idPerfil}" >
+                                                    <f:attribute name="fieldLabel" value="un Perfil" />
+                                                    <f:validator validatorId="selectOneValidator" />
+                                                    <f:selectItem itemLabel="Seleccione un perfil" itemValue="0"/>
+                                                    <f:selectItems value="#{usuarioControlador.perfiles}" var="listPerfiles" itemValue="#{listPerfiles.idPerfil}" itemLabel="#{listPerfiles.nombre}"/>
+                                                </h:selectOneMenu>
+                                            </div>	
+                                        </div>                                        
+                                        <div class="col-sm-3 control-label">
+                                            <p:commandButton value="Guardar" actionListener="#{usuarioControlador.guardarUsuario}"  update="@form" styleClass="btn btn-primary"
+                                                             onstart="openAjaxStatus();" oncomplete="closeAjaxStatus();"/>
+                                        </div>
+                                    </h:form>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <h:outputScript name="js/jstand_modal.js" />
+    </ui:define>
+
+</ui:composition>
